@@ -51,7 +51,7 @@ Overall the model demonstrates performance with accuracy â‰ˆ 0.88 and macro F1 â
 
 ## How to run
 
-1. Unarchive model_dev/gelectra_email_classifier.zip
+1. Download [gelectra_email_classifier.zip](https://drive.google.com/file/d/1VWfrqYZ4kSm8PJ6EfwRZXlRmUHX9KV5y/view?usp=share_link) and unarchive in *model_dev* directory
 
 2. Run the backend
 
