@@ -99,7 +99,7 @@ Results will be added once training completes.
 
 ## How to run
 
-1. Download [gelectra_email_classifier.zip](https://drive.google.com/file/d/1VWfrqYZ4kSm8PJ6EfwRZXlRmUHX9KV5y/view?usp=share_link) and unarchive in *model_dev* directory
+1. Download [gbert_email_classifier.zip](https://drive.google.com/file/d/1VWfrqYZ4kSm8PJ6EfwRZXlRmUHX9KV5y/view?usp=share_link) and unarchive in *model_dev* directory. Today described models publically unavailable, so you could install only previous version. After unarchive .zip please rename this directory to 'gbert_email_classifier3' or change path to your directory in server.py.
 
 2. Run the backend
 
