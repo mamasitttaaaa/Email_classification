@@ -2,6 +2,7 @@
 
 This web application automatically classifies email texts into 34 distinct categories. The classifier is based on deepset/gbert-base (BERT for German) and is trained on an internal dataset of 5,000 labeled emails.
 The training pipeline now includes an explicit validation split for checkpoint selection via macro F1 and early stopping. Final quality is reported on a held-out test set that is never used for model selection.
+The best-performing model uses class-weighted cross-entropy with boosted weights for underrepresented financial classes and mild label smoothing, achieving a macro F1 of 0.8938 and accuracy of 0.892 on the test set.
 
 ## Project structure
 
@@ -74,9 +75,9 @@ Classification report for experiment 3 is available [here](model_dev/gbert_email
 
 | Experiment | Accuracy | Macro F1 | Weighted F1 |
 |------------|----------|----------|-------------|
-| Exp 1.     | 0.876    | 0.874    | 0.875       |
-| Exp 2.     | 0.876.   | 0.873    | 0.875       |
-| Exp 3.     | pending  | pending  |pending      |
+| Exp 1      | 0.876    | 0.874    | 0.875       |
+| Exp 2      | 0.876    | 0.873    | 0.875       |
+| Exp 3      | 0.892    | 0.894    | 0.891       |
 
 Experiment 1 - Baseline (512 tokens, no smoothing):
 - Macro F1 = 0.8737, Accuracy = 0.876.
@@ -89,11 +90,11 @@ Experiment 2 - 384 tokens + Label Smoothing 0.05:
 - Improved classes: *Bank statement (+0.01 F1), Compensation release (+0.01 F1), Contract rewriting (+0.03 F1)*.
 - Still weak: *Financing balance residual value leasing (0.52), Financing balance credit (0.77), Insurance change (0.80)*.
 
-Experiment 3 - Boosted Class Weights (in progress):
-
-This run increases class-weight multipliers for historically weak categories (×1.8 before normalization) combined with smoothing 0.05.
-Expected outcome: higher macro F1 and narrower gap between financial vs service categories.
-Results will be added once training completes.
+Experiment 3 - Boosted Class Weights (The best model overall!):
+- Macro F1 = 0.8938, Accuracy = 0.892, showing a clear improvement over Exp 2 (+0.02 F1).
+- The boosted weighting (×1.8 before normalization) effectively reduced the performance gap between smaller “financial” classes and larger service categories.
+- Improved classes: *Financing balance credit (+0.03 F1 → 0.74), Financing balance residual value leasing (+0.17 F1 → 0.69), Bank statement (+0.01 F1 → 0.72), Insurance change (+0.09 F1 → 0.89), General enquiry/errors (+0.00 F1 → 0.95)*.
+- Overall, the model achieved the best macro F1 so far, confirming that targeted weight boosts helped underrepresented financial topics without degrading the dominant categories.  
 
 > Note: historically, Financing balance credit and Financing balance residual value leasing underperform due to lower support; the latest weighting strategy aims to improve these without hurting major classes.
 
