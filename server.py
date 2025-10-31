@@ -13,9 +13,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_PATH = "./model_dev/gbert_email_classifier_fixed"
-TOKENIZER_PATH = "./model_dev/gbert_email_classifier_fixed"
-LABEL_ENCODER_PATH = "./model_dev/gbert_email_classifier_fixed/label_encoder.pkl"
+MODEL_PATH = "./model_dev/gbert_email_classifier3"
+TOKENIZER_PATH = "./model_dev/gbert_email_classifier3"
+LABEL_ENCODER_PATH = "./model_dev/gbert_email_classifier3/label_encoder.pkl"
 
 tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_PATH)
 
